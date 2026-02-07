@@ -75,6 +75,21 @@ const DuaCard: React.FC<DuaCardProps> = ({ dua, categoryName }) => {
                         </div>
                     )}
 
+                    {/* When to Recite */}
+                    {dua.when && (
+                        <div className="flex gap-3 items-start bg-emerald-50 rounded-xl p-4 border border-emerald-100">
+                            <div className="w-6 h-6 mt-0.5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0">
+                                <i className="fas fa-clock text-[10px]"></i>
+                            </div>
+                            <div>
+                                <h4 className="text-[10px] font-bold text-emerald-600 uppercase tracking-widest mb-1">When to Recite</h4>
+                                <p className="text-slate-700 text-sm leading-relaxed">
+                                    {dua.when}
+                                </p>
+                            </div>
+                        </div>
+                    )}
+
                     {/* Benefits / Reference */}
                     {(dua.benefits || dua.reference) && (
                         <div className="bg-slate-50/50 rounded-2xl p-5 border border-slate-100 space-y-4">

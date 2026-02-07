@@ -1,0 +1,49 @@
+{
+    "category": {
+        "title": "Salah & Masjid",
+        "icon": "fa-mosque",
+        "color": "bg-emerald-600"
+    },
+    "duas": [
+        {
+            "title": "After Hearing the Adhan",
+            "arabic": "",
+            "transliteration": "",
+            "translation": "",
+            "translation_tamil": "",
+            "reference": "",
+            "benefits": "",
+            "when": "Recite after hearing the Adhan."
+        },
+        {
+            "title": "Dua After Wudu",
+            "arabic": "",
+            "transliteration": "",
+            "translation": "",
+            "translation_tamil": "",
+            "reference": "",
+            "benefits": "",
+            "when": "Recite after completing wudu."
+        },
+        {
+            "title": "Entering the Masjid",
+            "arabic": "",
+            "transliteration": "",
+            "translation": "",
+            "translation_tamil": "",
+            "reference": "",
+            "benefits": "",
+            "when": "Recite when entering the mosque, preferably with the right foot first."
+        },
+        {
+            "title": "Leaving the Masjid",
+            "arabic": "",
+            "transliteration": "",
+            "translation": "",
+            "translation_tamil": "",
+            "reference": "",
+            "benefits": "",
+            "when": "Recite when leaving the mosque, preferably with the left foot first."
+        }
+    ]
+}

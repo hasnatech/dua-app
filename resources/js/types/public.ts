@@ -7,6 +7,7 @@ export interface Dua {
     transliteration: string | null;
     translation: string | null;
     translation_tamil: string | null;
+    when: string | null;
     reference: string | null;
     benefits: string | null;
     audio_url: string | null;

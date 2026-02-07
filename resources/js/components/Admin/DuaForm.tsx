@@ -19,6 +19,7 @@ export default function DuaForm({ dua, categories, submitLabel, action, method =
         transliteration: dua?.transliteration || '',
         translation: dua?.translation || '',
         translation_tamil: dua?.translation_tamil || '',
+        when: dua?.when || '',
         reference: dua?.reference || '',
         benefits: dua?.benefits || '',
         audio_url: dua?.audio_url || '',
@@ -104,6 +105,18 @@ export default function DuaForm({ dua, categories, submitLabel, action, method =
                     className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500 text-base p-3"
                 />
                 {errors.translation_tamil && <p className="mt-1 text-sm text-red-600">{errors.translation_tamil}</p>}
+            </div>
+
+            <div>
+                <label className="block text-sm font-medium text-gray-700">When to Recite</label>
+                <textarea
+                    value={data.when}
+                    onChange={e => setData('when', e.target.value)}
+                    rows={2}
+                    className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500 text-base p-3"
+                    placeholder="e.g., Drink Zam Zam while standing..."
+                />
+                {errors.when && <p className="mt-1 text-sm text-red-600">{errors.when}</p>}
             </div>
 
             <div className="grid grid-cols-2 gap-4">

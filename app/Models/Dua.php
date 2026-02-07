@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Dua extends Model
 {
-    protected $fillable = ['category_id', 'title', 'arabic', 'transliteration', 'translation', 'translation_tamil', 'reference', 'benefits', 'audio_url', 'sort_order'];
+    protected $fillable = ['category_id', 'title', 'arabic', 'transliteration', 'translation', 'translation_tamil', 'when', 'reference', 'benefits', 'audio_url', 'sort_order'];
 
     public function category()
     {

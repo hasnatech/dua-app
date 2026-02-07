@@ -30,12 +30,20 @@ export default function Index({ duas, categories }: Props) {
                         <div className="p-6 text-gray-900">
                             <div className="flex justify-between items-center mb-6">
                                 <h2 className="text-xl font-semibold">Duas</h2>
-                                <Link
-                                    href={route('admin.duas.create')} // Ensure route exists or point to shared create if needed
-                                    className="bg-emerald-600 text-white px-4 py-2 rounded-md hover:bg-emerald-700"
-                                >
-                                    Add Dua
-                                </Link>
+                                <div className="space-x-4">
+                                    <Link
+                                        href={route('admin.import.create')}
+                                        className="bg-slate-600 text-white px-4 py-2 rounded-md hover:bg-slate-700"
+                                    >
+                                        Import JSON
+                                    </Link>
+                                    <Link
+                                        href={route('admin.duas.create')}
+                                        className="bg-emerald-600 text-white px-4 py-2 rounded-md hover:bg-emerald-700"
+                                    >
+                                        Add Dua
+                                    </Link>
+                                </div>
                             </div>
 
                             <div className="overflow-x-auto">

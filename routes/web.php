@@ -20,6 +20,9 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
         return redirect()->route('admin.categories.index');
     })->name('dashboard');
 
+    Route::get('import', [\App\Http\Controllers\Admin\ImportController::class, 'create'])->name('import.create');
+    Route::post('import', [\App\Http\Controllers\Admin\ImportController::class, 'store'])->name('import.store');
+    
     Route::resource('categories', \App\Http\Controllers\Admin\CategoryController::class);
     Route::resource('duas', \App\Http\Controllers\Admin\DuaController::class);
 });
