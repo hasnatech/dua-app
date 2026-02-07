@@ -1,0 +1,48 @@
+import { useForm } from '@inertiajs/react';
+import { Input } from '@/components/ui/input';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Button } from '@/components/ui/button';
+import AppLayout from '@/layouts/app-layout';
+import { Head } from '@inertiajs/react';
+import { Textarea } from '@/components/ui/textarea';
+import ComboBox from '@/components/ui/combo';
+import ImageUpload from '@/components/ui/image-upload';
+interface Field {
+  name: string;
+  type: string;
+}
+
+interface DynamicFormProps {
+  {{modelLower}}?: any;
+  fields?: Field[];
+  isEdit?: boolean;
+}
+
+export default function DynamicForm({ {{modelLower}},  isEdit = false }: DynamicFormProps) {
+
+  const { data, setData, post, put, processing, errors } = useForm({{initialData}});
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (isEdit && {{modelLower}}?.id) {
+      put(`/admin/{{modelPluralLower}}/${{{modelLower}}.id}`);
+    } else {
+      post('/admin/{{modelPluralLower}}');
+    }
+  };
+
+  return (
+    <AppLayout breadcrumbs={[{ title: isEdit ? 'Edit {{model}}' : 'Create {{model}}', href: '#' }]}> 
+      <Head title={isEdit ? 'Edit {{model}}' : 'Create {{model}}'} />
+      <form onSubmit={handleSubmit} className="space-y-6 p-8 container mx-auto">
+        <div className="grid grid-cols-3 gap-6">
+          {{formFields}}
+          
+        </div>
+        <Button type="submit" disabled={processing} className="">
+          {isEdit ? 'Update {{model}}' : 'Create {{model}}'}
+        </Button>
+      </form>
+    </AppLayout>
+  );
+}

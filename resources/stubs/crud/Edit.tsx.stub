@@ -1,0 +1,11 @@
+import DynamicForm from './DynamicForm';
+import { Head } from '@inertiajs/react';
+
+export default function Edit(data: any) {
+  return (
+    <>
+      <Head title="Edit {{model}}" />
+      <DynamicForm {{modelLower}}={data.{{modelLower}}} isEdit={true}/>
+    </>
+  );
+}

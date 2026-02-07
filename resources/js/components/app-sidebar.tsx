@@ -1,0 +1,53 @@
+import { NavMain } from '@/components/nav-main';
+import { NavUser } from '@/components/nav-user';
+import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
+import { type NavItem } from '@/types';
+import { Link } from '@inertiajs/react';
+import { ChartBar, LayoutGrid, MessageCircleMore, User } from 'lucide-react';
+import AppLogo from './app-logo';
+
+const mainNavItems: NavItem[] = [
+    {
+        title: 'Dashboard',
+        href: '/admin',
+        icon: LayoutGrid,
+    },
+    {
+        title: 'Categories',
+        href: '/admin/categories',
+        icon: ChartBar,
+    },
+    {
+        title: 'Duas',
+        href: '/admin/duas',
+        icon: MessageCircleMore,
+    },
+];
+
+export function AppSidebar() {
+    return (
+        <Sidebar collapsible="icon" variant="inset">
+            <SidebarHeader>
+                <SidebarMenu>
+                    <SidebarMenuItem>
+                        <SidebarMenuButton size="lg" asChild>
+                            <div>
+                                <Link href="/" prefetch>
+                                    <AppLogo />
+                                </Link>
+                            </div>
+                        </SidebarMenuButton>
+                    </SidebarMenuItem>
+                </SidebarMenu>
+            </SidebarHeader>
+
+            <SidebarContent>
+                <NavMain items={mainNavItems} />
+            </SidebarContent>
+
+            <SidebarFooter>
+                <NavUser />
+            </SidebarFooter>
+        </Sidebar>
+    );
+}

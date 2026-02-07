@@ -1,0 +1,11 @@
+import DynamicForm from './DynamicForm';
+import { Head } from '@inertiajs/react';
+
+export default function Create({{modelLower}}: { {{modelLower}}: any[] }) {
+  return (
+    <>
+      <Head title="Create User" />
+      <DynamicForm {{modelLower}}={{{modelLower}}} />
+    </>
+  );
+}

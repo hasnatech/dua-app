@@ -1,0 +1,1 @@
+import{j as e}from"./app-CMgd9CFO.js";function x({isActive:t}){return t?e.jsx("span",{className:"rounded-full bg-green-500 px-3 py-1 text-xs text-white",children:"Yes"}):e.jsx("span",{className:"rounded-full bg-red-500 px-3 py-1 text-xs text-white",children:"No"})}export{x as A};
