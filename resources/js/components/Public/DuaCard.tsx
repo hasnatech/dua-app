@@ -39,8 +39,8 @@ const DuaCard: React.FC<DuaCardProps> = ({ dua, categoryName }) => {
 
                 <div className="space-y-8">
                     {/* Arabic Text */}
-                    <div className="bg-emerald-50/40 rounded-3xl p-8 text-center border border-emerald-50 shadow-sm">
-                        <p className="font-arabic text-4xl leading-[2] text-slate-900 dir-rtl" dir="rtl">
+                    <div className="bg-emerald-50/40 p-3 text-center border border-emerald-50 -mx-5">
+                        <p className="font-arabic text-3xl leading-[2.5] text-slate-900 dir-rtl" dir="rtl">
                             {dua.arabic}
                         </p>
                     </div>

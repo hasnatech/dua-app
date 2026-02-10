@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react';
 import laravel from 'laravel-vite-plugin';
 import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
+import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
     plugins: [
@@ -13,6 +14,30 @@ export default defineConfig({
         }),
         react(),
         tailwindcss(),
+        VitePWA({
+            registerType: 'autoUpdate',
+            outDir: 'public/build',
+            manifest: {
+                name: 'E-Brain Application',
+                short_name: 'E-Brain',
+                start_url: '/',
+                display: 'standalone',
+                background_color: '#644f29',
+                theme_color: '#644f29',
+                icons: [
+                    {
+                        src: '/dark.png',
+                        sizes: '192x192',
+                        type: 'image/png'
+                    },
+                    {
+                        src: '/dark.png',
+                        sizes: '512x512',
+                        type: 'image/png'
+                    }
+                ]
+            }
+        }),
     ],
     esbuild: {
         jsx: 'automatic',
