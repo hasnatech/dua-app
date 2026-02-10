@@ -8,9 +8,11 @@
 
     <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
-    {{-- <link rel="icon" href="/logo.ico" sizes="any"> --}}
+    {{--
+    <link rel="icon" href="/logo.ico" sizes="any"> --}}
     <link rel="icon" href="/images/light.png" type="image/png">
-    {{-- <link rel="apple-touch-icon" href="/apple-touch-icon.png"> --}}
+    {{--
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png"> --}}
     <link rel="apple-touch-icon" href="/dark.png">
 
 
@@ -18,11 +20,11 @@
     <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
 
     <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#644f29">
+    <meta name="theme-color" content="#2b6429ff">
 
     @routes
     @viteReactRefresh
-    @vite(['resources/js/app.tsx', "resources/js/pages/{$page['component']}.tsx"])
+    @vite(['resources/js/app.tsx'])
     @inertiaHead
 </head>
 
