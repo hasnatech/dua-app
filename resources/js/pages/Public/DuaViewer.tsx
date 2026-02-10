@@ -58,13 +58,7 @@ const DuaViewer: React.FC<DuaViewerProps> = ({ initialCategories, initialCategor
         }
     };
 
-    const handleSwipeLeft = () => paginate(1);
-    const handleSwipeRight = () => paginate(-1);
 
-    const [touchStart, setTouchStart] = useState<number | null>(null);
-    const [touchEnd, setTouchEnd] = useState<number | null>(null);
-
-    const minSwipeDistance = 50;
 
     if (!category || duas.length === 0) {
         return (
@@ -133,8 +127,6 @@ const DuaViewer: React.FC<DuaViewerProps> = ({ initialCategories, initialCategor
                             key={currentDua.id}
                             dua={currentDua}
                             categoryName={category.name}
-                            onSwipeLeft={handleSwipeLeft}
-                            onSwipeRight={handleSwipeRight}
                             direction={direction}
                         />
                     </AnimatePresence>
@@ -144,7 +136,7 @@ const DuaViewer: React.FC<DuaViewerProps> = ({ initialCategories, initialCategor
                 <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-white via-white to-transparent pointer-events-none z-20">
                     <div className="flex items-center justify-between pointer-events-auto">
                         <button
-                            onClick={() => currentIndex > 0 && setCurrentIndex(prev => prev - 1)}
+                            onClick={() => paginate(-1)}
                             disabled={currentIndex === 0}
                             className={`w-12 h-12 rounded-2xl flex items-center justify-center border shadow-sm transition-all ${currentIndex === 0 ? 'text-slate-200 border-slate-50' : 'text-slate-600 border-slate-100 bg-white active:scale-90 hover:border-emerald-200'}`}
                         >
@@ -156,7 +148,7 @@ const DuaViewer: React.FC<DuaViewerProps> = ({ initialCategories, initialCategor
                         </div>
 
                         <button
-                            onClick={() => currentIndex < duas.length - 1 && setCurrentIndex(prev => prev + 1)}
+                            onClick={() => paginate(1)}
                             disabled={currentIndex === duas.length - 1}
                             className={`w-12 h-12 rounded-2xl flex items-center justify-center border shadow-sm transition-all ${currentIndex === duas.length - 1 ? 'text-slate-200 border-slate-50' : 'text-emerald-600 border-emerald-100 bg-emerald-50 active:scale-90 hover:bg-emerald-100'}`}
                         >
