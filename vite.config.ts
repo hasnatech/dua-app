@@ -18,14 +18,14 @@ export default defineConfig({
             registerType: 'autoUpdate',
             outDir: 'public/build',
             manifest: {
-                name: 'E-Brain Application',
-                short_name: 'E-Brain',
+                name: 'Dua App',
+                short_name: 'Dua App',
                 description: 'Your spiritual companion for Umrah and daily Duas.',
                 start_url: '/',
                 scope: '/',
                 display: 'standalone',
-                background_color: '#644f29',
-                theme_color: '#644f29',
+                background_color: '#7ec090ff',
+                theme_color: '#02270cff',
                 icons: [
                     {
                         src: '/dark.png',
