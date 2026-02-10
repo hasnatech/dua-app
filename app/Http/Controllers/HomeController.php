@@ -22,7 +22,18 @@ class HomeController extends Controller
         ]);
     }
 
-    public function duaViewer($categoryId)
+    public function showCategory($id)
+    {
+        $category = Category::with(['duas' => function($query) {
+            $query->orderBy('sort_order', 'asc');
+        }])->findOrFail($id);
+
+        return Inertia::render('Public/Category/Show', [
+            'category' => $category
+        ]);
+    }
+
+    public function duaViewer($categoryId, $duaId = null)
     {
         // We can just render the same page structure or a specific viewer
         // For deep linking, we might want to load the specific category
@@ -34,7 +45,8 @@ class HomeController extends Controller
 
         return Inertia::render('Public/DuaViewer', [
             'initialCategories' => $categories,
-            'initialCategoryId' => $categoryId
+            'initialCategoryId' => $categoryId,
+            'initialDuaId' => $duaId
         ]);
     }
 }

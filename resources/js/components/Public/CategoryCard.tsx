@@ -11,7 +11,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category }) => {
 
     return (
         <button
-            onClick={() => router.visit(route('dua.viewer', category.id))}
+            onClick={() => router.visit(route('category.show', category.id))}
             className="w-full bg-white rounded-2xl p-4 flex items-center gap-4 border border-slate-100 shadow-sm hover:shadow-md transition-shadow text-left group"
         >
             <div className={`w-14 h-14 rounded-xl ${category.color || 'bg-emerald-600'} flex items-center justify-center text-white shrink-0`}>

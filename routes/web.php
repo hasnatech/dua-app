@@ -11,7 +11,8 @@ Route::get('/test', function () {
 
 // Public Routes (Offline First App)
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/dua/{categoryId}', [HomeController::class, 'duaViewer'])->name('dua.viewer');
+Route::get('/category/{id}', [HomeController::class, 'showCategory'])->name('category.show');
+Route::get('/dua/{categoryId}/{duaId?}', [HomeController::class, 'duaViewer'])->name('dua.viewer');
 
 // Admin Routes
 Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
@@ -25,7 +26,14 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     
     Route::resource('categories', \App\Http\Controllers\Admin\CategoryController::class);
     Route::resource('duas', \App\Http\Controllers\Admin\DuaController::class);
+    Route::resource('videos', \App\Http\Controllers\Admin\VideoController::class);
 });
+
+Route::get('/videos', function () {
+    return \Inertia\Inertia::render('Public/Videos/Index', [
+        'videos' => \App\Models\Video::where('is_active', true)->latest()->get()
+    ]);
+})->name('videos.index');
 
 // require __DIR__ . '/settings.php';
 require __DIR__ . '/auth.php';

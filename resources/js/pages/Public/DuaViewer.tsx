@@ -9,9 +9,10 @@ import { Category, Dua } from '@/types/public'; // Ensure this type is correct
 interface DuaViewerProps {
     initialCategories: Category[];
     initialCategoryId: string;
+    initialDuaId?: string;
 }
 
-const DuaViewer: React.FC<DuaViewerProps> = ({ initialCategories, initialCategoryId }) => {
+const DuaViewer: React.FC<DuaViewerProps> = ({ initialCategories, initialCategoryId, initialDuaId }) => {
 
     // Resolve category and Duas
     const { category, duas } = useMemo(() => {
@@ -29,7 +30,20 @@ const DuaViewer: React.FC<DuaViewerProps> = ({ initialCategories, initialCategor
         return { category: cat, duas: cat?.duas || [] };
     }, [initialCategoryId, initialCategories]);
 
-    const [currentIndex, setCurrentIndex] = useState(0);
+    // Find index of initialDuaId if provided
+    const initialIndex = useMemo(() => {
+        if (!initialDuaId || !duas) return 0;
+        const index = duas.findIndex(d => d.id == Number(initialDuaId));
+        return index !== -1 ? index : 0;
+    }, [duas, initialDuaId]);
+
+    const [currentIndex, setCurrentIndex] = useState(initialIndex);
+
+    // Reset index when category or initialDuaId changes
+    useEffect(() => {
+        setCurrentIndex(initialIndex);
+    }, [initialIndex]);
+
     const [touchStart, setTouchStart] = useState<number | null>(null);
     const [touchEnd, setTouchEnd] = useState<number | null>(null);
 

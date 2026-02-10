@@ -1,6 +1,6 @@
 
 import React, { useState, useMemo, useEffect } from 'react';
-import { Head, usePage } from '@inertiajs/react';
+import { Head, Link, usePage } from '@inertiajs/react';
 import PublicLayout from '@/Layouts/PublicLayout';
 import CategoryCard from '@/Components/Public/CategoryCard';
 import { getBookmarks } from '@/utils/storage';
@@ -133,12 +133,12 @@ const Home: React.FC<{ initialCategories: Category[] }> = ({ initialCategories }
                         </div>
                         <span className="text-[10px] font-bold text-slate-500 uppercase">Qibla</span>
                     </div>
-                    <div className="flex flex-col items-center gap-2">
+                    <Link href={route('videos.index')} className="flex flex-col items-center gap-2">
                         <div className="w-12 h-12 bg-white rounded-2xl shadow-sm border border-slate-50 flex items-center justify-center text-amber-500">
-                            <i className="fas fa-star"></i>
+                            <i className="fas fa-play-circle"></i>
                         </div>
-                        <span className="text-[10px] font-bold text-slate-500 uppercase">Favour</span>
-                    </div>
+                        <span className="text-[10px] font-bold text-slate-500 uppercase">Video</span>
+                    </Link>
                     <div className="flex flex-col items-center gap-2">
                         <div className="w-12 h-12 bg-white rounded-2xl shadow-sm border border-slate-50 flex items-center justify-center text-rose-500">
                             <i className="fas fa-location-dot"></i>

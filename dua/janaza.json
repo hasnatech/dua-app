@@ -1,0 +1,59 @@
+{
+    "category": {
+        "title": "Janazah & After Death",
+        "icon": "fa-cross",
+        "color": "bg-slate-700"
+    },
+    "duas": [
+        {
+            "title": "Dua for the Deceased (Janazah Prayer)",
+            "arabic": "اللَّهُمَّ اغْفِرْ لَهُ وَارْحَمْهُ، وَعَافِهِ وَاعْفُ عَنْهُ، وَأَكْرِمْ نُزُلَهُ، وَوَسِّعْ مُدْخَلَهُ، وَاغْسِلْهُ بِالْمَاءِ وَالثَّلْجِ وَالْبَرَدِ، وَنَقِّهِ مِنَ الْخَطَايَا كَمَا نَقَّيْتَ الثَّوْبَ الأَبْيَضَ مِنَ الدَّنَسِ، وَأَدْخِلْهُ الْجَنَّةَ، وَأَعِذْهُ مِنْ عَذَابِ الْقَبْرِ وَعَذَابِ النَّارِ",
+            "transliteration": "Allahummaghfir lahu warhamhu, wa ‘aafihi wa‘fu ‘anhu, wa akrim nuzulahu, wa wassi‘ mudkhalahu, waghsilhu bil maa’i wath-thalji wal-barad, wa naqqihi minal khataayaa kamaa naqqaytath-thawbal abyadha minad-danas, wa adkhilhul jannah, wa a‘idhhu min ‘adhaabil-qabri wa ‘adhaabin-naar.",
+            "translation": "O Allah, forgive him, have mercy on him, grant him peace and pardon him. Honour his stay, expand his entrance, wash him with water, snow and ice, cleanse him of sins as a white garment is cleansed of dirt. Admit him into Paradise and protect him from the punishment of the grave and the Fire.",
+            "translation_tamil": "ஓ அல்லாஹ்! அவரை மன்னிப்பாயாக, அவருக்கு இரக்கம் காட்டுவாயாக, அவரை நலமுடன் வைத்துப் பாவங்களை மன்னிப்பாயாக. அவரின் தங்குதலையை சிறப்பாக்குவாயாக, அவரின் நுழைவை விரிவாக்குவாயாக. நீர், பனி, ஆலங்கட்டி கொண்டு அவரை சுத்தப்படுத்துவாயாக. அவரை சுவர்க்கத்தில் நுழையச் செய்வாயாக, கப்ர் வேதனையிலும் நரக வேதனையிலும் இருந்து காப்பாயாக.",
+            "reference": "Sahih Muslim",
+            "benefits": "Seeking forgiveness, mercy, and Jannah for the deceased.",
+            "when": "Recite during the Janazah prayer after the takbeers."
+        },
+        {
+            "title": "Dua After Burying the Deceased",
+            "arabic": "اللَّهُمَّ اغْفِرْ لَهُ، اللَّهُمَّ ثَبِّتْهُ",
+            "transliteration": "Allahummaghfir lahu, Allahumma thabbit-hu",
+            "translation": "O Allah, forgive him. O Allah, make him firm (in answering the angels).",
+            "translation_tamil": "ஓ அல்லாஹ்! அவரை மன்னிப்பாயாக. ஓ அல்லாஹ்! அவரை உறுதியாக நிலைநிறுத்துவாயாக.",
+            "reference": "Sunan Abi Dawud",
+            "benefits": "Asking Allah to forgive and strengthen the deceased in the grave.",
+            "when": "Recite after the burial, while standing near the grave."
+        },
+        {
+            "title": "Dua for Forgiveness of the Deceased",
+            "arabic": "رَبَّنَا اغْفِرْ لَنَا وَلِإِخْوَانِنَا الَّذِينَ سَبَقُونَا بِالْإِيمَانِ",
+            "transliteration": "Rabbana ighfir lana wa li-ikhwaninal-ladhina sabaquna bil-iman",
+            "translation": "Our Lord, forgive us and our brothers who preceded us in faith.",
+            "translation_tamil": "எங்கள் இறைவா! எங்களையும், நம்பிக்கையில் எங்களுக்கு முன் சென்ற எங்கள் சகோதரர்களையும் மன்னிப்பாயாக.",
+            "reference": "Qur’an 59:10",
+            "benefits": "Seeking forgiveness for all believers who have passed away.",
+            "when": "Recite when making dua for any deceased Muslim."
+        },
+        {
+            "title": "Dua for Patience for the Family",
+            "arabic": "إِنَّا لِلَّهِ وَإِنَّا إِلَيْهِ رَاجِعُونَ، اللَّهُمَّ أْجُرْنِي فِي مُصِيبَتِي وَاخْلُفْ لِي خَيْرًا مِنْهَا",
+            "transliteration": "Inna lillahi wa inna ilayhi raji‘un, Allahumma’jurni fi musibati wakhluf li khayran minha",
+            "translation": "Indeed we belong to Allah and indeed to Him we will return. O Allah, reward me in my calamity and replace it for me with something better.",
+            "translation_tamil": "நிச்சயமாக நாம் அல்லாஹ்வுக்கே சொந்தமானவர்கள், நிச்சயமாக அவனிடமே திரும்புவோம். ஓ அல்லாஹ்! இந்த துயரத்தில் எனக்கு நன்மையை அளித்து, இதைவிட சிறந்ததை எனக்கு வழங்குவாயாக.",
+            "reference": "Sahih Muslim",
+            "benefits": "Gives patience and hope during loss.",
+            "when": "Recite when hearing about a death or when consoling yourself or others."
+        },
+        {
+            "title": "Dua When Visiting the Graveyard",
+            "arabic": "السَّلَامُ عَلَيْكُمْ أَهْلَ الدِّيَارِ مِنَ الْمُؤْمِنِينَ وَالْمُسْلِمِينَ، وَإِنَّا إِنْ شَاءَ اللَّهُ بِكُمْ لَاحِقُونَ، نَسْأَلُ اللَّهَ لَنَا وَلَكُمُ الْعَافِيَةَ",
+            "transliteration": "As-salamu ‘alaykum ahlad-diyari minal mu’minina wal-muslimin, wa inna in sha Allahu bikum lahiqun, nas’alullaha lana wa lakumul ‘afiyah",
+            "translation": "Peace be upon you, O inhabitants of the graves, from among the believers and the Muslims. Indeed, we will, if Allah wills, join you. We ask Allah for well-being for us and for you.",
+            "translation_tamil": "நம்பிக்கையாளர்களும் முஸ்லிம்களுமான கப்ர் வாசிகளே! உங்கள்மீது சாந்தி உண்டாகட்டும். அல்லாஹ் நாடினால் நாங்களும் உங்களைச் சேர்வோம். எங்களுக்கும் உங்களுக்கும் நலத்தை அல்லாஹ்விடம் கேட்கிறோம்.",
+            "reference": "Sahih Muslim",
+            "benefits": "Reminds of the hereafter and brings mercy for the deceased.",
+            "when": "Recite when visiting the graveyard or passing by graves."
+        }
+    ]
+}
