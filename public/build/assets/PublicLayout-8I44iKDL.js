@@ -1,1 +1,0 @@
-import{j as e}from"./app-D1PyiKA2.js";function l({children:s}){return e.jsx("div",{className:"min-h-screen bg-slate-100 flex justify-center",children:e.jsx("div",{className:"w-full max-w-md bg-slate-50 min-h-screen relative shadow-2xl shadow-slate-200 overflow-hidden",children:s})})}export{l as P};

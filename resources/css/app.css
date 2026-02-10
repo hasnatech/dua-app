@@ -318,12 +318,6 @@ ul.list {
     }
 }
 
-.fire {
-    background-image: url('/images/fire_1.gif');
-    background-repeat: no-repeat;
-    background-size: contain;
-}
-
 @keyframes blob {
     0% {
         transform: translate(0px, 0px) scale(1);
