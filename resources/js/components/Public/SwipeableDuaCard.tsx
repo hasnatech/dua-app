@@ -60,8 +60,9 @@ const SwipeableDuaCard: React.FC<SwipeableDuaCardProps> = ({
             className="absolute inset-0 flex items-center justify-center p-4"
             drag="x"
             dragConstraints={constraints}
+            dragDirectionLock
             onDragEnd={handleDragEnd}
-            style={{ x, rotate, opacity }}
+            style={{ x, rotate, opacity, touchAction: 'pan-y' }}
             variants={variants}
             initial="enter"
             animate="center"
