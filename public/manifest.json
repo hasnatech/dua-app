@@ -3,16 +3,16 @@
     "short_name": "Dua App",
     "start_url": "/",
     "display": "standalone",
-    "background_color": "#644f29",
-    "theme_color": "#644f29",
+    "background_color": "#07461fff",
+    "theme_color": "#07461fff",
     "icons": [
         {
-            "src": "/dark.png",
+            "src": "/icon.png",
             "sizes": "192x192",
             "type": "image/png"
         },
         {
-            "src": "/dark.png",
+            "src": "/icon.png",
             "sizes": "512x512",
             "type": "image/png"
         }

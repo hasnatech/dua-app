@@ -6,14 +6,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title inertia>{{ config('app.name', 'Laravel') }}</title>
+    <title inertia>{{ config('app.name', 'Dua App') }}</title>
 
     {{--
     <link rel="icon" href="/logo.ico" sizes="any"> --}}
-    <link rel="icon" href="/images/light.png" type="image/png">
+    <link rel="icon" href="/images/icon.png" type="image/png">
     {{--
     <link rel="apple-touch-icon" href="/apple-touch-icon.png"> --}}
-    <link rel="apple-touch-icon" href="/dark.png">
+    <link rel="apple-touch-icon" href="/icon.png">
 
 
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -23,7 +23,7 @@
     <meta name="theme-color" content="#644f29">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="E-Brain">
+    <meta name="apple-mobile-web-app-title" content="Dua App">
 
     @routes
     @viteReactRefresh
