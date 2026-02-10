@@ -20,7 +20,9 @@ export default defineConfig({
             manifest: {
                 name: 'E-Brain Application',
                 short_name: 'E-Brain',
+                description: 'Your spiritual companion for Umrah and daily Duas.',
                 start_url: '/',
+                scope: '/',
                 display: 'standalone',
                 background_color: '#644f29',
                 theme_color: '#644f29',
@@ -28,12 +30,14 @@ export default defineConfig({
                     {
                         src: '/dark.png',
                         sizes: '192x192',
-                        type: 'image/png'
+                        type: 'image/png',
+                        purpose: 'any maskable'
                     },
                     {
                         src: '/dark.png',
                         sizes: '512x512',
-                        type: 'image/png'
+                        type: 'image/png',
+                        purpose: 'any maskable'
                     }
                 ]
             }

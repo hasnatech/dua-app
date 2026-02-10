@@ -20,7 +20,10 @@
     <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
 
     <link rel="manifest" href="/build/manifest.webmanifest">
-    <meta name="theme-color" content="#2b6429ff">
+    <meta name="theme-color" content="#644f29">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="E-Brain">
 
     @routes
     @viteReactRefresh
