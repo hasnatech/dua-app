@@ -65,9 +65,9 @@ const Home: React.FC<{ initialCategories: Category[] }> = ({ initialCategories }
                             <h1 className="text-2xl font-bold tracking-tight">Umrah Companion</h1>
                             <p className="text-emerald-200/80 text-sm">Blessed be your journey</p>
                         </div>
-                        <button className="w-10 h-10 rounded-xl bg-emerald-700 flex items-center justify-center border border-emerald-600 shadow-sm">
+                        <Link href={route('admin.dashboard')} className="w-10 h-10 rounded-xl bg-emerald-700 flex items-center justify-center border border-emerald-600 shadow-sm">
                             <i className="fas fa-user-circle text-lg"></i>
-                        </button>
+                        </Link>
                     </div>
 
                     {/* Search Bar */}

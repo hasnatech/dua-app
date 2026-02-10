@@ -1,0 +1,1 @@
+import{j as e}from"./app-BUw5efNL.js";import{u as r}from"./useTranslation-BS5wdLNn.js";const i=()=>{const{t:s,i18n:o}=r();return e.jsxs("section",{className:"relative min-h-screen overflow-hidden",children:[e.jsx("h1",{children:s("dashboard")}),e.jsx("h1",{children:s("welcome")})]})};export{i as default};

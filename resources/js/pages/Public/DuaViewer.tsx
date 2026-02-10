@@ -2,9 +2,11 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { Head, router } from '@inertiajs/react';
 import PublicLayout from '@/Layouts/PublicLayout';
-import DuaCard from '@/Components/Public/DuaCard';
+import DuaCard from '@/components/Public/DuaCard';
 import { getBookmarks } from '@/utils/storage';
 import { Category, Dua } from '@/types/public'; // Ensure this type is correct
+import { AnimatePresence } from 'framer-motion';
+import SwipeableDuaCard from '@/components/Public/SwipeableDuaCard';
 
 interface DuaViewerProps {
     initialCategories: Category[];
@@ -44,6 +46,21 @@ const DuaViewer: React.FC<DuaViewerProps> = ({ initialCategories, initialCategor
         setCurrentIndex(initialIndex);
     }, [initialIndex]);
 
+    const [direction, setDirection] = useState(0);
+
+    const paginate = (newDirection: number) => {
+        if (newDirection === 1 && currentIndex < duas.length - 1) {
+            setDirection(1);
+            setCurrentIndex(prev => prev + 1);
+        } else if (newDirection === -1 && currentIndex > 0) {
+            setDirection(-1);
+            setCurrentIndex(prev => prev - 1);
+        }
+    };
+
+    const handleSwipeLeft = () => paginate(1);
+    const handleSwipeRight = () => paginate(-1);
+
     const [touchStart, setTouchStart] = useState<number | null>(null);
     const [touchEnd, setTouchEnd] = useState<number | null>(null);
 
@@ -70,27 +87,7 @@ const DuaViewer: React.FC<DuaViewerProps> = ({ initialCategories, initialCategor
         );
     }
 
-    const handleTouchStart = (e: React.TouchEvent) => {
-        setTouchEnd(null);
-        setTouchStart(e.targetTouches[0].clientX);
-    };
-
-    const handleTouchMove = (e: React.TouchEvent) => {
-        setTouchEnd(e.targetTouches[0].clientX);
-    };
-
-    const handleTouchEnd = () => {
-        if (!touchStart || !touchEnd) return;
-        const distance = touchStart - touchEnd;
-        const isLeftSwipe = distance > minSwipeDistance;
-        const isRightSwipe = distance < -minSwipeDistance;
-
-        if (isLeftSwipe && currentIndex < duas.length - 1) {
-            setCurrentIndex(prev => prev + 1);
-        } else if (isRightSwipe && currentIndex > 0) {
-            setCurrentIndex(prev => prev - 1);
-        }
-    };
+    // Touch handling removed in favor of SwipeableDuaCard
 
     const currentDua = duas[currentIndex];
 
@@ -99,14 +96,11 @@ const DuaViewer: React.FC<DuaViewerProps> = ({ initialCategories, initialCategor
             <Head title={category.name} />
             <div
                 className="h-screen flex flex-col bg-white overflow-hidden relative"
-                onTouchStart={handleTouchStart}
-                onTouchMove={handleTouchMove}
-                onTouchEnd={handleTouchEnd}
             >
                 {/* Top Header */}
                 <div className="px-4 py-3 flex items-center justify-between z-10 bg-white border-b border-slate-50">
                     <button
-                        onClick={() => router.visit(route('home'))}
+                        onClick={() => window.history.back()}
                         className="w-10 h-10 flex items-center justify-center text-slate-400 hover:text-slate-600 rounded-full active:bg-slate-50 transition-colors"
                     >
                         <i className="fas fa-chevron-left"></i>
@@ -115,10 +109,10 @@ const DuaViewer: React.FC<DuaViewerProps> = ({ initialCategories, initialCategor
                         <h1 className="text-xs font-bold text-slate-400 uppercase tracking-widest truncate">{category.name}</h1>
                     </div>
                     <button
+                        onClick={() => router.visit(route('home'))}
                         className="w-10 h-10 flex items-center justify-center text-slate-400 hover:text-slate-600 rounded-full active:bg-slate-50 transition-colors"
-                        onClick={() => { /* Potential settings or info toggle */ }}
                     >
-                        <i className="fas fa-share-nodes"></i>
+                        <i className="fas fa-home"></i>
                     </button>
                 </div>
 
@@ -134,16 +128,20 @@ const DuaViewer: React.FC<DuaViewerProps> = ({ initialCategories, initialCategor
 
                 {/* Swipeable View Area */}
                 <div className="flex-1 relative overflow-hidden bg-white">
-                    <div
-                        className="absolute inset-0 transition-all duration-300 ease-out"
-                        key={currentDua.id} // Trigger animation on key change
-                    >
-                        <DuaCard dua={currentDua} categoryName={category.name} />
-                    </div>
+                    <AnimatePresence initial={false} custom={direction} mode="popLayout">
+                        <SwipeableDuaCard
+                            key={currentDua.id}
+                            dua={currentDua}
+                            categoryName={category.name}
+                            onSwipeLeft={handleSwipeLeft}
+                            onSwipeRight={handleSwipeRight}
+                            direction={direction}
+                        />
+                    </AnimatePresence>
                 </div>
 
                 {/* Modern Pagination Navigation */}
-                <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-white via-white to-transparent pointer-events-none">
+                <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-white via-white to-transparent pointer-events-none z-20">
                     <div className="flex items-center justify-between pointer-events-auto">
                         <button
                             onClick={() => currentIndex > 0 && setCurrentIndex(prev => prev - 1)}
