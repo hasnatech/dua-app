@@ -17,6 +17,37 @@ export default defineConfig({
         VitePWA({
             registerType: 'autoUpdate',
             outDir: 'public/build',
+            workbox: {
+                globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
+                cleanupOutdatedCaches: true,
+                runtimeCaching: [
+                    {
+                        urlPattern: ({ url }) => url.pathname.startsWith('/api'),
+                        handler: 'NetworkFirst',
+                        options: {
+                            cacheName: 'api-cache',
+                            expiration: {
+                                maxEntries: 100,
+                                maxAgeSeconds: 60 * 60 * 24 * 30, // 30 Days
+                            },
+                            cacheableResponse: {
+                                statuses: [0, 200],
+                            },
+                        },
+                    },
+                    {
+                        urlPattern: ({ url }) => /\.(?:png|jpg|jpeg|svg|gif|webp|woff|woff2|ttf|eot|ico)$/.test(url.pathname),
+                        handler: 'CacheFirst',
+                        options: {
+                            cacheName: 'images-fonts-cache',
+                            expiration: {
+                                maxEntries: 50,
+                                maxAgeSeconds: 60 * 60 * 24 * 365, // 1 Year
+                            },
+                        },
+                    }
+                ]
+            },
             manifest: {
                 name: 'Dua App',
                 short_name: 'Dua App',
