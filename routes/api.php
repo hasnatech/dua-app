@@ -11,6 +11,7 @@ Route::get('/sync/export/{table}', [SyncController::class, 'exportTable']);
 
 // Public App Sync
 Route::get('/public/sync', [\App\Http\Controllers\Api\PublicController::class, 'sync']);
+Route::get('/categories', [\App\Http\Controllers\API\CategoryController::class, 'index']);
 
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/user', [AuthController::class, 'profile'])->middleware('auth:sanctum');
