@@ -47,9 +47,16 @@ class DuaController extends Controller
             'translation_tamil' => 'nullable|string',
             'reference' => 'nullable|string',
             'benefits' => 'nullable|string',
-            'audio_url' => 'nullable|url',
+            'audio_file' => 'nullable|file|mimes:mp3|max:10240', // 10MB Max
             'sort_order' => 'integer'
         ]);
+
+        if ($request->hasFile('audio_file')) {
+            $path = $request->file('audio_file')->store('audio', 'public');
+            $validated['audio_url'] = '/storage/' . $path;
+        }
+
+        unset($validated['audio_file']); // Remove file from array before creating model
 
         \App\Models\Dua::create($validated);
 
@@ -86,9 +93,24 @@ class DuaController extends Controller
             'translation_tamil' => 'nullable|string',
             'reference' => 'nullable|string',
             'benefits' => 'nullable|string',
-            'audio_url' => 'nullable|url',
+            'audio_file' => 'nullable|file|mimes:mp3|max:10240',
             'sort_order' => 'integer'
         ]);
+
+        if ($request->hasFile('audio_file')) {
+            // Optional: Delete old file if exists
+            if ($dua->audio_url) {
+                $oldPath = str_replace('/storage/', '', $dua->audio_url);
+                if (\Illuminate\Support\Facades\Storage::disk('public')->exists($oldPath)) {
+                    \Illuminate\Support\Facades\Storage::disk('public')->delete($oldPath);
+                }
+            }
+
+            $path = $request->file('audio_file')->store('audio', 'public');
+            $validated['audio_url'] = '/storage/' . $path;
+        }
+
+        unset($validated['audio_file']);
 
         $dua->update($validated);
 

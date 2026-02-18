@@ -12,7 +12,8 @@ interface Props {
 }
 
 export default function DuaForm({ dua, categories, submitLabel, action, method = 'post' }: Props) {
-    const { data, setData, post, put, processing, errors } = useForm({
+    const { data, setData, post, processing, errors } = useForm({
+        _method: method,
         category_id: dua?.category_id || (categories.length > 0 ? categories[0].id : ''),
         title: dua?.title || '',
         arabic: dua?.arabic || '',
@@ -23,20 +24,18 @@ export default function DuaForm({ dua, categories, submitLabel, action, method =
         reference: dua?.reference || '',
         benefits: dua?.benefits || '',
         audio_url: dua?.audio_url || '',
+        audio_file: null as File | null,
         sort_order: dua?.sort_order || 0,
     });
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        if (method === 'put') {
-            put(action);
-        } else {
-            post(action);
-        }
+        // Always use POST for file uploads, even for PUT/PATCH (method spoofing)
+        post(action);
     };
 
     return (
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-6" encType="multipart/form-data">
             <div>
                 <label className="block text-sm font-medium text-gray-700">Category</label>
                 <select
@@ -144,14 +143,25 @@ export default function DuaForm({ dua, categories, submitLabel, action, method =
             </div>
 
             <div>
-                <label className="block text-sm font-medium text-gray-700">Audio URL</label>
+                <label className="block text-sm font-medium text-gray-700">Audio File (MP3)</label>
                 <input
-                    type="url"
-                    value={data.audio_url}
-                    onChange={e => setData('audio_url', e.target.value)}
-                    className="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500 text-base p-3"
+                    type="file"
+                    accept=".mp3,audio/mpeg"
+                    onChange={e => setData('audio_file', e.target.files ? e.target.files[0] : null)}
+                    className="mt-1 block w-full rounded-lg border border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500 text-base p-3 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 service-upload"
                 />
-                {errors.audio_url && <p className="mt-1 text-sm text-red-600">{errors.audio_url}</p>}
+                {/* @ts-ignore */}
+                {errors.audio_file && <p className="mt-1 text-sm text-red-600">{errors.audio_file}</p>}
+
+                {data.audio_url && (
+                    <div className="mt-2">
+                        <p className="text-sm text-gray-500 mb-1">Current Audio:</p>
+                        <audio controls className="w-full">
+                            <source src={data.audio_url} type="audio/mpeg" />
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                )}
             </div>
 
             <div>

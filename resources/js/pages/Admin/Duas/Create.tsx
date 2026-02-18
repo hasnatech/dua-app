@@ -1,8 +1,8 @@
 
 import React from 'react';
 import { Head } from '@inertiajs/react';
-import AppLayout from '@/Layouts/app-layout';
-import DuaForm from '@/Components/Admin/DuaForm';
+import AppLayout from '@/layouts/app-layout';
+import DuaForm from '@/components/Admin/DuaForm';
 import { Category } from '@/types/public';
 
 interface Props {

@@ -1,0 +1,200 @@
+import PublicLayout from '@/layouts/PublicLayout';
+import React, { useEffect, useMemo, useState } from 'react';
+import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
+// import DuaCard from '@/components/Public/DuaCard'; // Unused?
+import SwipeableDuaCard from '@/components/Public/SwipeableDuaCard';
+import { useCategory } from '@/hooks/useCategory';
+import { usePublicData } from '@/hooks/usePublicData';
+import type { Category } from '@/types/public';
+import { getBookmarks } from '@/utils/storage';
+import { AnimatePresence } from 'framer-motion';
+
+const DuaViewer: React.FC = () => {
+    const { id: duaIdParam } = useParams<{ id: string }>();
+    const [searchParams] = useSearchParams();
+    const categoryIdParam = searchParams.get('categoryId');
+    const navigate = useNavigate();
+
+    // Context Loading
+    // If categoryId is present, load that category.
+    // If 'bookmarks', load bookmarks.
+
+    // We need 'initialCategories' logic if we want to support 'bookmarks' from all categories
+    // effectively.
+    // useCategory handles single category.
+    // usePublicData handles all categories (good for bookmarks).
+
+    const isBookmarks = categoryIdParam === 'bookmarks';
+
+    const { category: singleCategory, loading: singleLoading } = useCategory(isBookmarks ? '' : (categoryIdParam || ''));
+    const { categories: allCategories, loading: allLoading } = usePublicData();
+
+    const loading = isBookmarks ? allLoading : singleLoading;
+
+    // Resolve category and Duas
+    const { category, duas } = useMemo(() => {
+        if (loading) return { category: null, duas: [] };
+
+        if (isBookmarks) {
+            const bookmarkIds = getBookmarks();
+            const allDuas = allCategories.flatMap(c => c.duas);
+            const bookmarkedDuas = allDuas.filter(d => bookmarkIds.includes(d.id));
+            return {
+                category: { id: 'bookmarks' as any, name: 'Bookmarked Duas', color: 'bg-amber-500' } as Category,
+                duas: bookmarkedDuas
+            };
+        }
+
+        // Single Category
+        if (singleCategory) {
+            return { category: singleCategory, duas: singleCategory.duas || [] };
+        }
+
+        return { category: null, duas: [] };
+    }, [isBookmarks, categoryIdParam, singleCategory, allCategories, loading]);
+
+    // Find index of initialDuaId
+    const initialIndex = useMemo(() => {
+        if (!duaIdParam || !duas.length) return 0;
+        const index = duas.findIndex(d => d.id == Number(duaIdParam));
+        return index !== -1 ? index : 0;
+    }, [duas, duaIdParam]);
+
+    const [currentIndex, setCurrentIndex] = useState(initialIndex);
+
+    // Sync currentIndex if duaIdParam changes (external navigation)
+    useEffect(() => {
+        setCurrentIndex(initialIndex);
+    }, [initialIndex]);
+
+    const [direction, setDirection] = useState(0);
+
+    const paginate = (newDirection: number) => {
+        if (newDirection === 1 && currentIndex < duas.length - 1) {
+            setDirection(1);
+            setCurrentIndex(prev => prev + 1);
+            // Optional: Update URL? Maybe not to avoid history spam, or use replace
+            // navigate(`/dua/${duas[currentIndex + 1].id}?categoryId=${categoryIdParam}`, { replace: true });
+        } else if (newDirection === -1 && currentIndex > 0) {
+            setDirection(-1);
+            setCurrentIndex(prev => prev - 1);
+            // navigate(`/dua/${duas[currentIndex - 1].id}?categoryId=${categoryIdParam}`, { replace: true });
+        }
+    };
+
+    // Update title
+    useEffect(() => {
+        if (category) {
+            document.title = `${category.name} - Umrah Companion`;
+        }
+    }, [category]);
+
+
+    if (loading) {
+        return (
+            <PublicLayout>
+                <div className="flex items-center justify-center min-h-screen text-emerald-800">
+                    <i className="fas fa-spinner fa-spin text-3xl"></i>
+                </div>
+            </PublicLayout>
+        );
+    }
+
+    if (!category || duas.length === 0) {
+        return (
+            <PublicLayout>
+                <div className="h-screen flex flex-col items-center justify-center p-8 bg-slate-50">
+                    <div className="w-20 h-20 bg-white rounded-3xl shadow-sm border border-slate-100 flex items-center justify-center mb-6">
+                        <i className="fas fa-heart-broken text-slate-200 text-3xl"></i>
+                    </div>
+                    <h2 className="text-lg font-bold text-slate-800 mb-2">Collection Empty</h2>
+                    <p className="text-slate-500 text-sm text-center mb-8">You haven't bookmarked any supplications yet.</p>
+                    <Link
+                        to="/"
+                        className="bg-emerald-600 text-white px-8 py-3 rounded-2xl font-bold shadow-lg shadow-emerald-200 active:scale-95 transition-transform"
+                    >
+                        Explore Categories
+                    </Link>
+                </div>
+            </PublicLayout>
+        );
+    }
+
+    const currentDua = duas[currentIndex];
+
+    return (
+        <PublicLayout>
+            <div
+                className="h-screen flex flex-col bg-white overflow-hidden relative"
+            >
+                {/* Top Header */}
+                <div className="px-4 py-3 flex items-center justify-between z-10 bg-white border-b border-slate-50">
+                    <button
+                        onClick={() => navigate(-1)}
+                        className="w-10 h-10 flex items-center justify-center text-slate-400 hover:text-slate-600 rounded-full active:bg-slate-50 transition-colors"
+                    >
+                        <i className="fas fa-chevron-left"></i>
+                    </button>
+                    <div className="flex-1 text-center px-4">
+                        <h1 className="text-xs font-bold text-slate-400 uppercase tracking-widest truncate">{category.name}</h1>
+                    </div>
+                    <Link
+                        to="/"
+                        className="w-10 h-10 flex items-center justify-center text-slate-400 hover:text-slate-600 rounded-full active:bg-slate-50 transition-colors"
+                    >
+                        <i className="fas fa-home"></i>
+                    </Link>
+                </div>
+
+                {/* Progress Bar Container */}
+                <div className="w-full flex h-1.5 bg-slate-100 gap-1 px-1">
+                    {duas.map((_, idx) => (
+                        <div
+                            key={idx}
+                            className={`h-full rounded-full transition-all duration-300 ${idx === currentIndex ? 'flex-[2] bg-emerald-500' : 'flex-1 bg-slate-200'}`}
+                        />
+                    ))}
+                </div>
+
+                {/* Swipeable View Area */}
+                <div className="flex-1 relative overflow-hidden bg-white">
+                    <AnimatePresence initial={false} custom={direction} mode="popLayout">
+                        <SwipeableDuaCard
+                            key={currentDua.id}
+                            dua={currentDua}
+                            categoryName={category.name}
+                            direction={direction}
+                        />
+                    </AnimatePresence>
+                </div>
+
+                {/* Modern Pagination Navigation */}
+                <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-white via-white to-transparent pointer-events-none z-20">
+                    <div className="flex items-center justify-between pointer-events-auto">
+                        <button
+                            onClick={() => paginate(-1)}
+                            disabled={currentIndex === 0}
+                            className={`w-12 h-12 rounded-2xl flex items-center justify-center border shadow-sm transition-all ${currentIndex === 0 ? 'text-slate-200 border-slate-50' : 'text-slate-600 border-slate-100 bg-white active:scale-90 hover:border-emerald-200'}`}
+                        >
+                            <i className="fas fa-arrow-left"></i>
+                        </button>
+
+                        <div className="bg-slate-900/5 backdrop-blur-md px-4 py-2 rounded-full border border-white/50 text-slate-700 font-bold text-xs tracking-widest shadow-sm">
+                            {currentIndex + 1} <span className="opacity-30 mx-1">/</span> {duas.length}
+                        </div>
+
+                        <button
+                            onClick={() => paginate(1)}
+                            disabled={currentIndex === duas.length - 1}
+                            className={`w-12 h-12 rounded-2xl flex items-center justify-center border shadow-sm transition-all ${currentIndex === duas.length - 1 ? 'text-slate-200 border-slate-50' : 'text-emerald-600 border-emerald-100 bg-emerald-50 active:scale-90 hover:bg-emerald-100'}`}
+                        >
+                            <i className="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </PublicLayout>
+    );
+};
+
+export default DuaViewer;

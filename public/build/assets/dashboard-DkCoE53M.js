@@ -1,0 +1,1 @@
+import{j as r,L as t}from"./app-BGBYpNtX.js";import{A as o}from"./app-layout-hjL-uVWs.js";import"./button-BBRPCcf8.js";import"./utils-CJ5hhVgv.js";import"./index-D0u494Sh.js";import"./index-W289defE.js";const a=[{title:"Dashboard",href:"/dashboard"}];function b(){return r.jsx(o,{breadcrumbs:a,children:r.jsx(t,{title:"Dashboard"})})}export{b as default};
